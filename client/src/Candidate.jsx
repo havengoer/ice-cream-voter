@@ -3,9 +3,9 @@ import React from 'react';
 const Candidate = props => { // flavor, likes
   return (
     <div className="row">
-      <div>{props.flavor}</div>
-      <div>{props.likes}</div>
-      <div><button onClick={() => props.clickEvent(props.flavor)}> ⬆ </button></div>
+      <div className="column">{props.flavor}</div>
+      <div className="column">{props.likes}</div>
+      <div className="column"><button onClick={() => props.clickEvent(props.flavor)}> ⬆ </button></div>
     </div>
   );
 }

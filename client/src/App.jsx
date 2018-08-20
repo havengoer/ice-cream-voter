@@ -10,6 +10,7 @@ class App extends Component {
     };
     
     this.addLike = this.addLike.bind(this);
+    this.addFlavor = this.addFlavor.bind(this);
   }
   
   componentDidMount() {
@@ -38,7 +39,19 @@ class App extends Component {
       this.setState({votes});
     });
   }
+ 
+  addFlavor(flavor) {
+    const newFlavor = document.getElementById("flavor_text").value;
+    axios.post('/api/like', {flavor: newFlavor}).then(response => {
+      const {flavor, likes} = response.data;
+      const votes = this.state.votes;
+      votes[flavor] = likes;
+      
+      this.setState({votes});
+    });
+  }
   
+
   render() {
     // if not initialized, return null
     if (!this.state.votes) return null;
@@ -50,8 +63,16 @@ class App extends Component {
     
     return (
       <div>
+
+        
+       <h1>Add Icecream Flavor</h1>
+     	<input type='text' id='flavor_text' ></input>           
+      <button onClick={()=> this.addFlavor()} >Add Flavor</button>
+
+
+
         <h1>Which Icecream is Supreme?</h1>
-        <br /><br /><br />
+        <br />
         <div className="main">
           {icecreamToBeRendered}
         </div>
